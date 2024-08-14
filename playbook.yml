@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+    vcenter_hostname: '192.168.3.62'
+    vcenter_username: 'administrator@vsphere.local'
+    vcenter_password: 'VMware1!'
+
+  tasks:
+    - name: Provide information about vCenter
+      community.vmware.vmware_about_info:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+      register: vcenter_about_info
+
+    - name: debug
+      debug:
+        var: vcenter_about_info 
